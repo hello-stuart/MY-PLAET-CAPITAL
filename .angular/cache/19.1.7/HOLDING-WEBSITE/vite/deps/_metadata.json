@@ -3,6 +3,7 @@
   "configHash": "4d25bf02",
   "lockfileHash": "48f8bffc",
   "browserHash": "ca996a9e",
+
   "optimized": {
     "@angular/common": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
@@ -14,6 +15,7 @@
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
       "fileHash": "95527161",
+
       "needsInterop": false
     },
     "@angular/core": {
@@ -26,6 +28,7 @@
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
       "fileHash": "c2327075",
+
       "needsInterop": false
     },
     "@angular/router": {
