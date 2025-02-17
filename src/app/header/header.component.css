@@ -1,0 +1,41 @@
+/* .img{
+    width: 16px;
+    height: 16px;
+}
+.img:hover{
+    color: white;
+    fill: white;
+    cursor: pointer;
+}
+.svg-icon {
+    filter: invert(0) sepia(0) saturate(100%) hue-rotate(0deg);
+    transition: filter 0.3s ease;
+  }
+  
+  .svg-icon:hover {
+    filter: invert(0%) brightness(200%);
+    cursor: pointer;
+} */
+ .main{
+    padding: 0px 30px;
+ }
+.svg{
+    color: #808080;
+}
+.svg:hover{
+    color: white;
+    cursor: pointer;
+}
+.menu{
+    font-size: 12px;
+    /* font-weight: 700; */
+}
+.home{
+    text-decoration: underline;
+}
+.item{
+    letter-spacing: 2px;
+}
+.item:hover{
+    text-decoration: underline;
+}
