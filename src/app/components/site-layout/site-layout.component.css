@@ -1,5 +1,5 @@
 .londonbg {
-  /* background: url("../../../assets/Banners/Bahawalpur.jpg") no-repeat center center fixed; */
+
   background-size: cover;
   width: 100vw;
   height: 100vh;
@@ -21,15 +21,4 @@
   position: relative;
   z-index: 1; /* Ensures content stays above the overlay */
 }
-
-
-
-/* 
-.background-container{
- background-size: cover;
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-} */
-
 

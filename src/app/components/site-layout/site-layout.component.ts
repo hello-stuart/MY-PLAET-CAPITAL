@@ -1,26 +1,20 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
 import { HomeComponent } from "../home/home.component";
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BackgroundImageDirective } from '../../directives/background-image.directive';
+import { GetlocationService } from '../../services/getlocation.service';
 
 @Component({
   selector: 'app-site-layout',
-  imports: [CommonModule, HeaderComponent, HomeComponent , BackgroundImageDirective],
+  imports: [CommonModule, HeaderComponent, HomeComponent, BackgroundImageDirective],
   templateUrl: './site-layout.component.html',
   styleUrl: './site-layout.component.css',
-  standalone:true,
+  standalone: true,
 })
 export class SiteLayoutComponent {
-
-
-  constructor(private http: HttpClient) { }
-
+  constructor(private getlocation: GetlocationService) { }
   greeting: string = '';
-
-
-
   city!: string;
   country!: string;
   locationMessage: string = '';
@@ -29,7 +23,17 @@ export class SiteLayoutComponent {
 
   ngOnInit(): void {
     this.setGreeting();
-    this.getLocation();
+    this.getlocation.getLocation().subscribe({
+      next: ((response: any) => {
+        this.city = response.city;
+        this.country = response.country;
+        console.log(this.city)
+
+        this.locationMessage = `City: ${this.city}, Country: ${this.country}`;
+      }), error: (() => {
+        this.locationMessage = 'Failed to fetch location data.';
+      })
+    });
 
   }
 
@@ -43,35 +47,5 @@ export class SiteLayoutComponent {
       this.greeting = 'Good Evening';
     }
   }
-
-
-
-
-
-
-  getLocation() {
-    const apiUrl = `https://ipinfo.io/json?token=78212df9ecbea0`;
-    this.http.get(apiUrl).subscribe({
-      next: ((response: any) => {
-        this.city = response.city;
-        this.country = response.country;
-        console.log(this.city)
-       
-        // this.getBackgroundImage(this.city)
-        this.locationMessage = `City: ${this.city}, Country: ${this.country}`;
-      }), error: (() => {
-        this.locationMessage = 'Failed to fetch location data.';
-      })
-    });
-  }
-
-
-  // getBackgroundImage(city:string) {
-  //   const accessKey = '5jTTGylr8Bsg88iw__CDrbOIeW1zAMfn_WjHgF0LGT4';
-  //   this.http.get(`https://api.unsplash.com/photos/random?query=${city}&client_id=${accessKey}`).subscribe((res: any) => {
-  //     this.backgroundImage = res.urls.full;
-  //   });
-  // }
-
 
 }
