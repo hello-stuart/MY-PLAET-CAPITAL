@@ -13,9 +13,7 @@ export class HomeComponent {
 
   greeting: string = '';
 
-  // latitude!: number;
-  // longitude!: number;
-  // locationMessage: string = '';
+
 
   city!: string;
   country!: string;
@@ -54,35 +52,5 @@ export class HomeComponent {
       })
     });
   }
-
-  // for user location
-  // getLocation() {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         this.latitude = position.coords.latitude;
-  //         this.longitude = position.coords.longitude;
-  //         this.locationMessage = `Latitude: ${this.latitude}, Longitude: ${this.longitude}`;
-  //       },
-  //       (error) => {
-  //         switch (error.code) {
-  //           case error.PERMISSION_DENIED:
-  //             this.locationMessage = 'User denied the request for Geolocation.';
-  //             break;
-  //           case error.POSITION_UNAVAILABLE:
-  //             this.locationMessage = 'Location information is unavailable.';
-  //             break;
-  //           case error.TIMEOUT:
-  //             this.locationMessage = 'The request to get user location timed out.';
-  //             break;
-  //         }
-  //       }
-  //     );
-  //   } else {
-  //     this.locationMessage = 'Geolocation is not supported by this browser.';
-  //   }
-  // }
-
-
 
 }
