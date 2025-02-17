@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-site-layout',
-  imports: [HeaderComponent, HomeComponent, CommonModule],
+  imports: [CommonModule, HeaderComponent, HomeComponent],
   templateUrl: './site-layout.component.html',
   styleUrl: './site-layout.component.css',
   standalone:true,
@@ -23,6 +23,7 @@ export class SiteLayoutComponent {
   city!: string;
   country!: string;
   locationMessage: string = '';
+  backgroundImage!: string;
 
 
   ngOnInit(): void {
@@ -51,11 +52,21 @@ export class SiteLayoutComponent {
       next: ((response: any) => {
         this.city = response.city;
         this.country = response.country;
+        this.getBackgroundImage(this.city)
         this.locationMessage = `City: ${this.city}, Country: ${this.country}`;
       }), error: (() => {
         this.locationMessage = 'Failed to fetch location data.';
       })
     });
   }
+
+
+  getBackgroundImage(city:string) {
+    const accessKey = '5jTTGylr8Bsg88iw__CDrbOIeW1zAMfn_WjHgF0LGT4';
+    this.http.get(`https://api.unsplash.com/photos/random?query=${city}&client_id=${accessKey}`).subscribe((res: any) => {
+      this.backgroundImage = res.urls.full;
+    });
+  }
+
 
 }
