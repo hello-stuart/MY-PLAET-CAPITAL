@@ -1,9 +1,9 @@
 .londonbg {
-    background: url('../../../assets/London.jpg') no-repeat center center fixed;
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    position: relative;
+
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
 }
 .body{
     background: url('../../../assets/evening.jpg') no-repeat center center fixed;
@@ -44,11 +44,9 @@
     background: rgba(0, 0, 0, 0.2); /* Dark overlay for fade effect */
 }
 
-.londonbg .home, 
+.londonbg .home,
 .londonbg .container {
-    position: relative;
-    z-index: 1; /* Ensures content stays above the overlay */
+  position: relative;
+  z-index: 1; /* Ensures content stays above the overlay */
 }
-.site-body{
-    /* color: black !important; */
-}
+
