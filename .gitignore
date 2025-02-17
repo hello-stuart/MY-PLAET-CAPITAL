@@ -282,7 +282,7 @@ FakesAssemblies/
 
 # GhostDoc plugin setting file
 *.GhostDoc.xml
-
+*_metadata.json
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 node_modules/
@@ -306,6 +306,8 @@ node_modules/
 # Visual Studio 6 technical files
 *.ncb
 *.aps
+*.tsbuildinfo
+*.angular
 
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts
