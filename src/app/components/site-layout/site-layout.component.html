@@ -1,6 +1,6 @@
-<div class="body" >
+<div [ngClass]="city=='Bahawalpur' ? 'londonbg' : 'body' ">
     <app-header></app-header>
-<div class="site-body" [class.londonbg]="city=='Bahawalpur'">
+<div class="site-body" >
     <app-home></app-home>
 </div>
 
