@@ -34,13 +34,13 @@ export class BackgroundImageDirective  {
     let imageUrl = '';
     switch (city) {
       case 'bahawalpur':
-        imageUrl = 'url(/assets/Banners/bahawalpur.jpg)';
+        imageUrl = 'url(assets/Banners/bahawalpur.jpg)';
         break;
       case 'dubai':
-        imageUrl = 'url(/assets/Banners/dubai.jpeg)';
+        imageUrl = 'url(assets/Banners/dubai.jpeg)';
         break;
-      case 'landon':
-        imageUrl = 'url(/assets/Banners/london.jpg)';
+      case 'london':
+        imageUrl = 'url(assets/Banners/london.jpg)';
         break;
       default:
         imageUrl = 'url(https://media.istockphoto.com/id/1347665170/photo/london-at-sunset.jpg?s=612x612&w=0&k=20&c=MdiIzSNKvP8Ct6fdgdV3J4FVcfsfzQjMb6swe2ybY6I=)';
