@@ -50,8 +50,8 @@
 
 @media (min-width: 320px) and (max-width: 992px) {
 
-    .navbar-toggler-bar{
-        filter: invert(1);
+    .navbar-toggler-icon{
+        filter: invert(1) !important;
     }
     .navbar-collapse {
         position: absolute;
