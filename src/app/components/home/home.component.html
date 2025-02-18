@@ -1,15 +1,58 @@
+<div class="home" [ngClass]="weatherCondition"
+    [style.background-image]="'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' + backgroundImage + ')'">
+    <div class="p-5 rounded text-center text-white texttt">
+        <h1 class="display-4">{{ greeting }}</h1>
+        <p class="lead">HELLO I'm stuart!</p>
+        {{ nativeGreeting }} I'm stuart!
+        <div *ngIf="loading" class="spinner"></div>
+        <!-- <p class="lead">HELLO I'm in testing mode right now!</p> -->
+    </div>
 
-<div class="home-section ">
-    <div class="home">
-        <div class="p-5 rounded text-center text-black">
-            <h1 class="display-3">{{ greeting }}</h1>
-            <p class="lead">HELLO I'M HAZLEWOOD THEME!</p>
-
+    <div class="weather-effect">
+        <div *ngIf="weatherCondition === 'snow'" class="snow">
+            <div *ngFor="let flake of snowFlakes" class="snowflake" [style.--animation-delay]="flake.delay"
+                [style.--left-position]="flake.left" [style.--animation-duration]="flake.duration"
+                [style.--flake-size]="flake.size"></div>
         </div>
 
-        <div class="container text-center mt-5 p-5 border shadow-lg rounded text-black">
-            <h1 class="display-3 mb-4">User Location</h1>
-            <p class="lead">{{ locationMessage }}</p>
+        <div *ngIf="weatherCondition === 'rain'">
+            <div *ngFor="let drop of rainDrops" class="raindrop" [style.--delay]="drop.delay" [style.--left]="drop.left"
+                [style.--duration]="drop.duration" [style.--length]="drop.length"></div>
+        </div>
+
+        <div *ngIf="weatherCondition === 'drizzle'">
+            <div *ngFor="let drop of drizzleDrops" class="drizzledrop" [style.--delay]="drop.delay"
+                [style.--left]="drop.left" [style.--duration]="drop.duration"></div>
+        </div>
+
+
+        <div *ngIf="weatherCondition === 'thunderstorm'">
+            <div *ngFor="let flash of thunderFlashes" class="lightning" [style.--delay]="flash.delay"
+                [style.--duration]="flash.duration"></div>
+        </div>
+        <div *ngIf="weatherCondition === 'clouds'">
+            <div *ngFor="let cloud of movingClouds" class="cloud" [style.--speed]="cloud.speed">
+                <div class="cloud-main"></div>
+                <div class="cloud-part-1"></div>
+                <div class="cloud-part-2"></div>
+                <div class="cloud-part-3"></div>
+            </div>
+        </div>
+
+        <div *ngIf="weatherCondition === 'clear'">
+            <div class="sun"></div>
+            <div *ngFor="let ray of sunRays" class="sun-ray" [style.--angle]="ray.angle" [style.--delay]="ray.delay">
+            </div>
         </div>
     </div>
 
+
+    <div class="container text-center mt-5 p-5 border shadow-lg rounded text-white">
+        <h1 class="display-4 mb-4">User Location</h1>
+        <h3 class="lead">{{ locationMessage }}</h3>
+        <div *ngIf="weatherData" class="weather-info mt-4">
+            <h2>{{ temperature }}°C</h2>
+            <h3>{{ weatherCondition }}</h3>
+        </div>
+    </div>
+</div>

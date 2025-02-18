@@ -1,0 +1,99 @@
+.navbar-brand {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+.nav-link {
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #fff !important;
+    position: relative;
+}
+
+.nav-link.active {
+    text-decoration: underline;
+}
+
+.navItem a::after {
+    content: "";
+    position: absolute;
+    bottom: 9px;
+    left: 9px;
+    width: 0%;
+    border-bottom: 2px solid #fff;
+    transition: all 0.3s linear;
+}
+
+.navItem a:hover::after {
+    width: 85%;
+    background-color: #000;
+}
+
+.navbar-nav .nav-item .nav-link i {
+    font-size: 16px;
+    color: #aaa;
+}
+
+.navbar-nav .nav-item .nav-link i:hover {
+    color: white;
+}
+
+.flag {
+    margin-top: 5px;
+}
+
+.headerr {
+    background: rgb(16 16 16) !important;
+    color: #fff !important;
+}
+
+@media (min-width: 320px) and (max-width: 992px) {
+
+    .navbar-toggler-bar{
+        filter: invert(1);
+    }
+    .navbar-collapse {
+        position: absolute;
+        top: 70px;
+        background-color: white;
+        width: 93%;
+        margin-inline: 5px;
+        padding: 30px;
+        z-index: 12;
+    }
+
+    .nav-link {
+        color: #000 !important;
+
+    }
+
+    .nav-link:hover {
+        background: #000 !important;
+        color: white !important;
+    }
+
+    .navItem a:hover::after {
+        width: 0%;
+    }
+
+    .nav-icon {
+        display: none;
+    }
+
+}
+
+.navbar-brand {
+    color: #fff !important;
+}
+
+/* @media (max-width: 576px) {
+      .navbar-brand {
+        font-size: 18px !important;
+        letter-spacing: 2px !important;
+      }
+      .nav-link {
+        font-size: 11px !important;
+        letter-spacing: 1px !important;
+      }
+    } */

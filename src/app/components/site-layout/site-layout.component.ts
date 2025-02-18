@@ -7,7 +7,7 @@ import { GetlocationService } from '../../services/getlocation.service';
 
 @Component({
   selector: 'app-site-layout',
-  imports: [CommonModule, HeaderComponent, HomeComponent, BackgroundImageDirective],
+  imports: [CommonModule, HomeComponent, HeaderComponent],
   templateUrl: './site-layout.component.html',
   styleUrl: './site-layout.component.css',
   standalone: true,
