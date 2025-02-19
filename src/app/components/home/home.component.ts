@@ -148,9 +148,9 @@ export class HomeComponent {
       let nativeLanguage;
 
       switch (countryCode) {
-        case 'IN':
-          nativeLanguage = 'hi';
-          break;
+        // case 'IN':
+        //   nativeLanguage = 'hi';
+        //   break;
         case 'PK': 
           nativeLanguage = 'ur';
           break;
@@ -160,6 +160,7 @@ export class HomeComponent {
         default:
           nativeLanguage = await this.translationService.getNativeLanguage(countryCode);
       }
+      // for london/us 
       this.isNativeEnglish = nativeLanguage.toLowerCase() === 'english';
 
       if (!this.isNativeEnglish) {
@@ -167,7 +168,6 @@ export class HomeComponent {
       }
 
       this.textDirection = ['AR', 'HE', 'FA'].includes(nativeLanguage.toUpperCase()) ? 'rtl' : 'ltr';
-
     } catch (error) {
       this.locationMessage = 'Unable to detect location';
       this.nativeGreeting = this.englishGreeting;
