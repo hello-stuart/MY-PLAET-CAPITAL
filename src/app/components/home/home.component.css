@@ -9,7 +9,7 @@
 
 .home {
     position: relative;
-    height: 100vh;
+    height: 130vh;
     background-size: cover;
     background-position: center;
     overflow: hidden;
@@ -291,6 +291,7 @@
 .texttt {
     position: relative;
     z-index: 12;
+    margin-top: 47px;
 }
 
 /* clouds css */

@@ -27,7 +27,7 @@ export class HomeComponent {
   temperature!: number;
 
 
-  englishGreeting = 'Hello,';
+  englishGreeting = 'Good morning';
   nativeGreeting = '';
   textDirection = 'ltr';
   loading = false;
@@ -38,8 +38,6 @@ export class HomeComponent {
   thunderFlashes: any[] = [];
   movingClouds: any[] = [];
   sunRays: any[] = [];
-
-
 
   ngOnInit(): void {
     this.getLocation();
@@ -174,12 +172,12 @@ export class HomeComponent {
       const response: any = await this.http.get('https://ipinfo.io/json?token=78212df9ecbea0').toPromise();
       this.locationMessage = `Location: ${response.city}, ${response.country}`;
       this.city = response.city;
-          this.country = response.country;
-          this.locationMessage = `City: ${this.city}, Country: ${this.country}`;
-          this.getWeather(this.city);
+      this.country = response.country;
+      this.locationMessage = `City: ${this.city}, Country: ${this.country}`;
+      this.getWeather(this.city);
       this.loading = true;
       const nativeLanguage = await this.translationService.getNativeLanguage(response.country);
-      const translated = await this.translationService.translateGreeting(this.englishGreeting, nativeLanguage);
+      const translated = await this.translationService.translateGreeting(this.greeting, nativeLanguage);
 
       this.nativeGreeting = translated;
       this.textDirection = ['AR', 'HE', 'FA'].includes(nativeLanguage.toUpperCase()) ? 'rtl' : 'ltr';

@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   standalone:true
 })
 export class HeaderComponent {
 
+  isScrolled = false;
+
+  @HostListener('document:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 50; // Change color when scrolling down 50px
+  }
 }
