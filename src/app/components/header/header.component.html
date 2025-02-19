@@ -1,11 +1,16 @@
 <nav class="navbar navbar-expand-lg  fixed-top" [ngClass]="{'scrolled': isScrolled}">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">HAZEL</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse navCollapse " id="navbarNav">
+
+
+            <button class="navbar-toggler" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+                [ngClass]="{'collapsed': isNavbarCollapsed}">
+                <span class="toggler-icon top-bar"></span>
+                <span class="toggler-icon middle-bar"></span>
+                <span class="toggler-icon bottom-bar"></span>
+            </button>
+
+        <div class="collapse navbar-collapse navCollapse " id="navbarNav"  [ngClass]="{'show': !isNavbarCollapsed}">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item "><a class="nav-link active" aria-current="page" href="#">HOME</a></li>
                 <li class="nav-item navItem ">
@@ -29,8 +34,9 @@
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fa-brands fa-vimeo"></i></a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-dribbble"></i></a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class=" fab fa-foursquare svg flag"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-basketball"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-foursquare svg h-white"></i>
+                </a></li>
             </ul>
         </div>
     </div>
