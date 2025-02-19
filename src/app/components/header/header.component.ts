@@ -12,6 +12,8 @@ export class HeaderComponent {
 
   isScrolled = false;
 
+  isNavbarCollapsed = true;
+
   @HostListener('document:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > 50; // Change color when scrolling down 50px
