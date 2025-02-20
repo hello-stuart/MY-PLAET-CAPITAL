@@ -27,14 +27,7 @@
             <div *ngFor="let flash of thunderFlashes" class="lightning" [style.--delay]="flash.delay"
                 [style.--duration]="flash.duration"></div>
         </div>
-        <!-- <div *ngIf="weatherCondition === 'clouds'">
-            <div *ngFor="let cloud of movingClouds" class="cloud" [style.--speed]="cloud.speed">
-                <div class="cloud-main"></div>
-                <div class="cloud-part-1"></div>
-                <div class="cloud-part-2"></div>
-                <div class="cloud-part-3"></div>
-            </div>
-        </div> -->
+
 
         <div *ngIf="weatherCondition === 'clear'">
             <div class="sun"></div>
