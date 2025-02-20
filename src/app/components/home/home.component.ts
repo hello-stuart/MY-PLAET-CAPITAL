@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { GetlocationService } from '../../services/getlocation.service';
 import { HttpClient } from '@angular/common/http';
 import { TranslateLanguageService } from '../../services/translate-language.service';
-import { async } from 'rxjs';
+
+import { RainEffectComponent } from "../rain-effect/rain-effect.component";
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, RainEffectComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   standalone: true
@@ -31,7 +32,6 @@ export class HomeComponent {
   nativeGreeting = '';
   textDirection = 'ltr';
   loading = false;
-
   snowFlakes: any[] = [];
   rainDrops: any[] = [];
   drizzleDrops: any[] = [];
@@ -45,14 +45,6 @@ export class HomeComponent {
     this.generateSnowFlakes(100);
   }
   initWeatherEffects() {
-    if (this.weatherCondition === 'rain') {
-      this.rainDrops = Array.from({ length: 50 }, () => ({
-        delay: `${Math.random() * 2}s`,
-        left: `${Math.random() * 100}%`,
-        duration: `${0.5 + Math.random() * 0.5}s`,
-        length: `${10 + Math.random() * 20}px`
-      }));
-    }
 
     if (this.weatherCondition === 'drizzle') {
       this.drizzleDrops = Array.from({ length: 30 }, () => ({
@@ -154,19 +146,7 @@ export class HomeComponent {
     });
   }
 
-  // getLocation() {
-  // const apiUrl = `https://ipinfo.io/json?token=78212df9ecbea0`;
-  // this.http.get(apiUrl).subscribe({
-  //   next: (response: any) => {
-  //     this.city = response.city;
-  //     this.country = response.country;
-  //     this.locationMessage = `City: ${this.city}, Country: ${this.country}`;
-  //     this.getWeather(this.city);
-  //   },
-  //   error: () => {
-  //     this.locationMessage = 'Failed to fetch location data.';
-  //   }
-  // });
+
   async getLocation() {
     try {
       const response: any = await this.http.get('https://ipinfo.io/json?token=78212df9ecbea0').toPromise();

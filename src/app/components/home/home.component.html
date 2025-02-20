@@ -15,9 +15,9 @@
         </div>
 
         <div *ngIf="weatherCondition === 'rain'">
-            <div *ngFor="let drop of rainDrops" class="raindrop" [style.--delay]="drop.delay" [style.--left]="drop.left"
-                [style.--duration]="drop.duration" [style.--length]="drop.length"></div>
+            <app-rain-effect></app-rain-effect>
         </div>
+
 
         <div *ngIf="weatherCondition === 'drizzle'">
             <div *ngFor="let drop of drizzleDrops" class="drizzledrop" [style.--delay]="drop.delay"
@@ -45,13 +45,4 @@
         </div>
     </div>
 
-
-    <!-- <div class="container text-center mt-5 p-5 border shadow-lg rounded text-white">
-        <h1 class="display-4 mb-4">User Location</h1>
-        <h3 class="lead">{{ locationMessage }}</h3>
-        <div *ngIf="weatherData" class="weather-info mt-4">
-            <h2>{{ temperature }}°C</h2>
-            <h3>{{ weatherCondition }}</h3>
-        </div>
-    </div> -->
 </div>
