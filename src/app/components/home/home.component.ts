@@ -4,7 +4,9 @@ import { GetlocationService } from '../../services/getlocation.service';
 import { HttpClient } from '@angular/common/http';
 import { TranslateLanguageService } from '../../services/translate-language.service';
 
+
 import { RainEffectComponent } from "../rain-effect/rain-effect.component";
+
 
 @Component({
   selector: 'app-home',
@@ -26,12 +28,16 @@ export class HomeComponent {
   weatherCondition: string = '';
   backgroundImage: string = '';
   temperature!: number;
+  isNativeEnglish: boolean = false;
+  isSpecialRegion: boolean = false;
 
 
   englishGreeting = 'Good morning';
   nativeGreeting = '';
   textDirection = 'ltr';
+
   loading = false;
+
   snowFlakes: any[] = [];
   rainDrops: any[] = [];
   drizzleDrops: any[] = [];
@@ -99,7 +105,10 @@ export class HomeComponent {
 
   getWeather(city: string) {
     const weatherApiKey = '6fa7a31565961cf29fd9919fc63e8da5';
-    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherApiKey}`;
+    const weatherQuery = this.country === 'HK' 
+    ? `Hong Kong,HK`  
+    : city;
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${weatherQuery}&units=metric&appid=${weatherApiKey}`;
 
     this.http.get(weatherUrl).subscribe({
       next: (response: any) => {
@@ -114,6 +123,55 @@ export class HomeComponent {
         console.error('Error fetching weather:', error);
       }
     });
+  }
+
+  async getLocation() {
+    try {
+      const response: any = await this.http.get('https://ipinfo.io/json?token=78212df9ecbea0').toPromise();
+      this.locationMessage = `Location: ${response.city}, ${response.country}`;
+      if (response.country === 'HK') {
+        this.city = 'Hong Kong'; 
+        this.isSpecialRegion = true;
+      } else {
+        this.city = response.city;
+      }
+
+      this.city = response.city;
+      this.country = response.country;
+      console.log(response.country, 'country');
+      this.locationMessage = `City: ${this.city}, Country: ${this.country}`;
+      this.getWeather(this.city);
+
+      const countryCode = response.country;
+      let nativeLanguage;
+
+      switch (countryCode) {
+        // case 'IN':
+        //   nativeLanguage = 'hi';
+        //   break;
+        case 'PK': 
+          nativeLanguage = 'ur';
+          break;
+        case 'HK':
+          nativeLanguage = 'zh-HK';
+          break;
+        default:
+          nativeLanguage = await this.translationService.getNativeLanguage(countryCode);
+      }
+      // for london/us 
+      this.isNativeEnglish = nativeLanguage.toLowerCase() === 'english';
+
+      if (!this.isNativeEnglish) {
+        this.nativeGreeting = await this.translationService.translateGreeting(this.greeting, nativeLanguage);
+      }
+
+      this.textDirection = ['AR', 'HE', 'FA'].includes(nativeLanguage.toUpperCase()) ? 'rtl' : 'ltr';
+    } catch (error) {
+      this.locationMessage = 'Unable to detect location';
+      this.nativeGreeting = this.englishGreeting;
+      this.locationMessage = 'Failed to fetch location data.';
+    } finally {
+    }
   }
 
   getBackgroundImage(weatherCondition: string) {
@@ -147,6 +205,7 @@ export class HomeComponent {
   }
 
 
+
   async getLocation() {
     try {
       const response: any = await this.http.get('https://ipinfo.io/json?token=78212df9ecbea0').toPromise();
@@ -171,6 +230,8 @@ export class HomeComponent {
     }
   }
   // }
+
+
   getLanguage(countryCode: string) {
     const url = `https://restcountries.com/v3.1/alpha/${countryCode}`;
     this.http.get(url).subscribe({

@@ -51,8 +51,6 @@
     }
 }
 
-
-
 .snowflake {
     position: fixed;
     top: -10px;
@@ -213,7 +211,7 @@
 }
 
 /* Clouds Animation */
-.cloud {
+/* .cloud {
     position: fixed;
     top: calc(10% + var(--size) * 0.5);
     left: var(--left);
@@ -223,9 +221,9 @@
     border-radius: 20px;
     animation: cloudMove var(--speed) linear infinite var(--delay);
     filter: blur(2px);
-}
+} */
 
-@keyframes cloudMove {
+/* @keyframes cloudMove {
     0% {
         transform: translateX(-100%);
     }
@@ -233,7 +231,7 @@
     100% {
         transform: translateX(100vw);
     }
-}
+} */
 
 /* Sun Animation */
 .sun {
@@ -466,4 +464,7 @@
     100% {
         transform: rotate(360deg);
     }
+}
+.message{
+    font-size: 1.5rem;
 }

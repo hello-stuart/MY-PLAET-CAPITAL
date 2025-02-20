@@ -16,7 +16,7 @@ export class TranslateLanguageService {
       const response: any = await this.http.get(`${this.countryApi}${countryCode}`).toPromise();
       return Object.values(response[0].languages)[0] as string;
     } catch (error) {
-      return 'English'; // Fallback
+      return 'English'; 
     }
   }
 
