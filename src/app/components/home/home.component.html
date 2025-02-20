@@ -13,9 +13,9 @@
         </div>
 
         <div *ngIf="weatherCondition === 'rain'">
-            <div *ngFor="let drop of rainDrops" class="raindrop" [style.--delay]="drop.delay" [style.--left]="drop.left"
-                [style.--duration]="drop.duration" [style.--length]="drop.length"></div>
+            <app-rain-effect></app-rain-effect>
         </div>
+
 
         <div *ngIf="weatherCondition === 'drizzle'">
             <div *ngFor="let drop of drizzleDrops" class="drizzledrop" [style.--delay]="drop.delay"

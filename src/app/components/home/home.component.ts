@@ -4,9 +4,13 @@ import { GetlocationService } from '../../services/getlocation.service';
 import { HttpClient } from '@angular/common/http';
 import { TranslateLanguageService } from '../../services/translate-language.service';
 
+
+import { RainEffectComponent } from "../rain-effect/rain-effect.component";
+
+
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, RainEffectComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   standalone: true
@@ -32,6 +36,8 @@ export class HomeComponent {
   nativeGreeting = '';
   textDirection = 'ltr';
 
+  loading = false;
+
   snowFlakes: any[] = [];
   rainDrops: any[] = [];
   drizzleDrops: any[] = [];
@@ -45,14 +51,6 @@ export class HomeComponent {
     this.generateSnowFlakes(100);
   }
   initWeatherEffects() {
-    if (this.weatherCondition === 'rain') {
-      this.rainDrops = Array.from({ length: 50 }, () => ({
-        delay: `${Math.random() * 2}s`,
-        left: `${Math.random() * 100}%`,
-        duration: `${0.5 + Math.random() * 0.5}s`,
-        length: `${10 + Math.random() * 20}px`
-      }));
-    }
 
     if (this.weatherCondition === 'drizzle') {
       this.drizzleDrops = Array.from({ length: 30 }, () => ({
@@ -205,6 +203,34 @@ export class HomeComponent {
       }
     });
   }
+
+
+
+  async getLocation() {
+    try {
+      const response: any = await this.http.get('https://ipinfo.io/json?token=78212df9ecbea0').toPromise();
+      this.locationMessage = `Location: ${response.city}, ${response.country}`;
+      this.city = response.city;
+      this.country = response.country;
+      this.locationMessage = `City: ${this.city}, Country: ${this.country}`;
+      this.getWeather(this.city);
+      this.loading = true;
+      const nativeLanguage = await this.translationService.getNativeLanguage(response.country);
+      const translated = await this.translationService.translateGreeting(this.greeting, nativeLanguage);
+
+      this.nativeGreeting = translated;
+      this.textDirection = ['AR', 'HE', 'FA'].includes(nativeLanguage.toUpperCase()) ? 'rtl' : 'ltr';
+
+    } catch (error) {
+      this.locationMessage = 'Unable to detect location';
+      this.nativeGreeting = this.englishGreeting;
+      this.locationMessage = 'Failed to fetch location data.';
+    } finally {
+      this.loading = false;
+    }
+  }
+  // }
+
 
   getLanguage(countryCode: string) {
     const url = `https://restcountries.com/v3.1/alpha/${countryCode}`;
