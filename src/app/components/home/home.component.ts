@@ -205,33 +205,6 @@ export class HomeComponent {
   }
 
 
-
-  async getLocation() {
-    try {
-      const response: any = await this.http.get('https://ipinfo.io/json?token=78212df9ecbea0').toPromise();
-      this.locationMessage = `Location: ${response.city}, ${response.country}`;
-      this.city = response.city;
-      this.country = response.country;
-      this.locationMessage = `City: ${this.city}, Country: ${this.country}`;
-      this.getWeather(this.city);
-      this.loading = true;
-      const nativeLanguage = await this.translationService.getNativeLanguage(response.country);
-      const translated = await this.translationService.translateGreeting(this.greeting, nativeLanguage);
-
-      this.nativeGreeting = translated;
-      this.textDirection = ['AR', 'HE', 'FA'].includes(nativeLanguage.toUpperCase()) ? 'rtl' : 'ltr';
-
-    } catch (error) {
-      this.locationMessage = 'Unable to detect location';
-      this.nativeGreeting = this.englishGreeting;
-      this.locationMessage = 'Failed to fetch location data.';
-    } finally {
-      this.loading = false;
-    }
-  }
-  // }
-
-
   getLanguage(countryCode: string) {
     const url = `https://restcountries.com/v3.1/alpha/${countryCode}`;
     this.http.get(url).subscribe({
