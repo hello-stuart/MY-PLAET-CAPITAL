@@ -60,16 +60,7 @@
     animation: snowFall linear infinite;
     animation-delay: var(--animation-delay);
     animation-duration: var(--animation-duration);
-    /* opacity: 0.8; */
-    /* filter: blur(1px); */
 }
-
-/* .snowflake:after {
-    content: "❄";
-    position: absolute;
-    top: -20px;
-    animation: snow 10s linear infinite;
-  } */
 
 @keyframes snowFall {
     0% {
