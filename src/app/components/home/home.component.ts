@@ -33,6 +33,7 @@ export class HomeComponent {
   isSpecialRegion: boolean = false;
 
 
+
   englishGreeting = 'Good morning';
   nativeGreeting = '';
   textDirection = 'ltr';
@@ -40,7 +41,7 @@ export class HomeComponent {
   loading = false;
 
   snowFlakes: any[] = [];
-  rainDrops: any[] = [];
+  // rainDrops: any[] = [];
   drizzleDrops: any[] = [];
   thunderFlashes: any[] = [];
   movingClouds: any[] = [];
@@ -118,8 +119,11 @@ export class HomeComponent {
 
   async getLocation() {
     try {
-      const response: any = await this.http.get('https://ipinfo.io/json?token=78212df9ecbea0').toPromise();
+      const response: any = await this.http
+        .get('https://ipinfo.io/json?token=78212df9ecbea0')
+        .toPromise();
       this.locationMessage = `Location: ${response.city}, ${response.country}`;
+      this.timeZone = response.timezone;
       if (response.country === 'HK') {
         this.city = 'Hong Kong';
         this.isSpecialRegion = true;
@@ -136,23 +140,21 @@ export class HomeComponent {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        hour12: false
+        hour12: false,
       });
 
       const formattedTime = formatter.format(now);
-      const hour = parseInt(formattedTime.split(':')[0]); 
-
-
+      const hour = parseInt(formattedTime.split(':')[0]);
+      console.log(formattedTime);
       if (hour >= 5 && hour < 12) {
         this.greeting = 'Good Morning';
       } else if (hour >= 12 && hour < 18) {
         this.greeting = 'Good Afternoon';
-      } else if (hour >= 18 && hour < 22) {
+      } else if (hour >= 17 && hour < 22) {
         this.greeting = 'Good Evening';
       } else {
         this.greeting = 'Good Night';
       }
-
 
       console.log(response.country, 'country');
       this.locationMessage = `City: ${this.city}, Country: ${this.country}`;
@@ -163,9 +165,9 @@ export class HomeComponent {
       let nativeLanguage;
 
       switch (countryCode) {
-        // case 'IN':
-        //   nativeLanguage = 'hi';
-        //   break;
+        case 'IN':
+          nativeLanguage = 'hi';
+          break;
         case 'PK':
           nativeLanguage = 'ur';
           break;
@@ -235,7 +237,7 @@ export class HomeComponent {
     });
   }
   clearWeatherEffects() {
-    this.rainDrops = [];
+    // this.rainDrops = [];
     this.drizzleDrops = [];
     this.thunderFlashes = [];
     this.movingClouds = [];
