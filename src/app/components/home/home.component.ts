@@ -147,13 +147,15 @@ export class HomeComponent {
       const hour = parseInt(formattedTime.split(':')[0]);
       console.log(formattedTime);
       if (hour >= 5 && hour < 12) {
-        this.greeting = 'Good Morning';
+        this.greeting = 'Good Morning ☀️';
       } else if (hour >= 12 && hour < 18) {
-        this.greeting = 'Good Afternoon';
+        // this.greeting = 'Good Afternoon☀️';
+        this.greeting = 'Good Afternoon☀️';
+
       } else if (hour >= 17 && hour < 22) {
-        this.greeting = 'Good Evening';
+        this.greeting = 'Good Evening ☀️';
       } else {
-        this.greeting = 'Good Night';
+        this.greeting = 'Good Night☀️';
       }
 
       console.log(response.country, 'country');
@@ -168,12 +170,21 @@ export class HomeComponent {
         case 'IN':
           nativeLanguage = 'hi';
           break;
+        case 'IN':
+          nativeLanguage = 'hi';
+          break;
         case 'PK':
           nativeLanguage = 'ur';
           break;
         case 'HK':
           nativeLanguage = 'zh-HK';
           break;
+          case 'MT':
+            nativeLanguage = 'mt';
+            break;
+            case 'FR':
+              nativeLanguage = 'fr';
+              break;
         default:
           nativeLanguage = await this.translationService.getNativeLanguage(countryCode);
       }
