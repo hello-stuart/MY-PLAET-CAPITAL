@@ -1,8 +1,8 @@
 <div class="home" [ngClass]="weatherCondition"
     [style.background-image]="'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' + backgroundImage + ')'">
     <div class="p-5 rounded text-center text-white texttt">
-        <h1 class="display-4">{{ greeting }}</h1>
-        <p class="message" *ngIf="!isNativeEnglish">{{ nativeGreeting }} </p>
+        <h1 class="display-4">{{ greeting.replace('☀️', '')  }}</h1>
+        <p class="message" *ngIf="!isNativeEnglish">{{ nativeGreeting.replace('☀️', '') }} </p>
     </div>
 
     <div class="weather-effect">
