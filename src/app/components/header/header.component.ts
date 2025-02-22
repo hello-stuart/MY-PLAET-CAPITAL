@@ -16,6 +16,6 @@ export class HeaderComponent {
 
   @HostListener('document:scroll', [])
   onWindowScroll() {
-    this.isScrolled = window.scrollY > 50; // Change color when scrolling down 50px
+    this.isScrolled = window.scrollY > 50; 
   }
 }
