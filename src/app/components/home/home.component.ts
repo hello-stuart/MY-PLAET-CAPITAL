@@ -23,6 +23,7 @@ export class HomeComponent {
   greeting: string = '';
   city!: string;
   country!: string;
+  timeZone!: string;
   locationMessage: string = '';
   weatherData: any;
   weatherCondition: string = '';
@@ -47,7 +48,7 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.getLocation();
-    this.setGreeting();
+
     this.generateSnowFlakes(100);
   }
   initWeatherEffects() {
@@ -92,22 +93,12 @@ export class HomeComponent {
       size: `${2 + Math.random() * 5}px`
     }));
   }
-  setGreeting(): void {
-    const hour = new Date().getHours();
-    if (hour < 12) {
-      this.greeting = 'Good Morning';
-    } else if (hour < 18) {
-      this.greeting = 'Good Afternoon';
-    } else {
-      this.greeting = 'Good Evening';
-    }
-  }
 
   getWeather(city: string) {
     const weatherApiKey = '6fa7a31565961cf29fd9919fc63e8da5';
-    const weatherQuery = this.country === 'HK' 
-    ? `Hong Kong,HK`  
-    : city;
+    const weatherQuery = this.country === 'HK'
+      ? `Hong Kong,HK`
+      : city;
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${weatherQuery}&units=metric&appid=${weatherApiKey}`;
 
     this.http.get(weatherUrl).subscribe({
@@ -130,7 +121,7 @@ export class HomeComponent {
       const response: any = await this.http.get('https://ipinfo.io/json?token=78212df9ecbea0').toPromise();
       this.locationMessage = `Location: ${response.city}, ${response.country}`;
       if (response.country === 'HK') {
-        this.city = 'Hong Kong'; 
+        this.city = 'Hong Kong';
         this.isSpecialRegion = true;
       } else {
         this.city = response.city;
@@ -138,9 +129,35 @@ export class HomeComponent {
 
       this.city = response.city;
       this.country = response.country;
+      // Get the current time in the user's time zone
+      const now = new Date();
+      const formatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: this.timeZone,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+
+      const formattedTime = formatter.format(now);
+      const hour = parseInt(formattedTime.split(':')[0]); 
+
+
+      if (hour >= 5 && hour < 12) {
+        this.greeting = 'Good Morning 🌞';
+      } else if (hour >= 12 && hour < 18) {
+        this.greeting = 'Good Afternoon ☀️';
+      } else if (hour >= 18 && hour < 22) {
+        this.greeting = 'Good Evening 🌆';
+      } else {
+        this.greeting = 'Good Night 🌙';
+      }
+
+
       console.log(response.country, 'country');
       this.locationMessage = `City: ${this.city}, Country: ${this.country}`;
       this.getWeather(this.city);
+
 
       const countryCode = response.country;
       let nativeLanguage;
@@ -149,7 +166,7 @@ export class HomeComponent {
         // case 'IN':
         //   nativeLanguage = 'hi';
         //   break;
-        case 'PK': 
+        case 'PK':
           nativeLanguage = 'ur';
           break;
         case 'HK':
@@ -203,6 +220,11 @@ export class HomeComponent {
       }
     });
   }
+
+
+
+
+
 
 
   getLanguage(countryCode: string) {
