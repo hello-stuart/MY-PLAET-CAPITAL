@@ -144,13 +144,13 @@ export class HomeComponent {
 
 
       if (hour >= 5 && hour < 12) {
-        this.greeting = 'Good Morning 🌞';
+        this.greeting = 'Good Morning';
       } else if (hour >= 12 && hour < 18) {
-        this.greeting = 'Good Afternoon ☀️';
+        this.greeting = 'Good Afternoon';
       } else if (hour >= 18 && hour < 22) {
-        this.greeting = 'Good Evening 🌆';
+        this.greeting = 'Good Evening';
       } else {
-        this.greeting = 'Good Night 🌙';
+        this.greeting = 'Good Night';
       }
 
 
@@ -220,12 +220,6 @@ export class HomeComponent {
       }
     });
   }
-
-
-
-
-
-
 
   getLanguage(countryCode: string) {
     const url = `https://restcountries.com/v3.1/alpha/${countryCode}`;
